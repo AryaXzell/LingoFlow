@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lingoflow — premium translator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #fcfcfd;
+            color: #1e293b;
+            margin: 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .main-card {
+            background: #ffffff;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.05);
+        }
+
+        textarea {
+            overflow: hidden;
+            resize: none;
+        }
+
+        /* markdown render styling */
+        #outputText strong { font-weight: 700; color: #000; }
+        #outputText em { font-style: italic; }
+        #outputText p { margin-bottom: 0.5rem; }
+
+        .custom-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .lang-grid {
+            max-height: 400px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+
+        .btn-press:active { transform: scale(0.96); }
+        
+        .animate-pop { animation: pop 0.2s ease-out forwards; }
+        @keyframes pop {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="w-full max-w-2xl space-y-5">
+        <div class="flex items-center justify-between px-2">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></div>
+                <h1 class="text-xl font-bold tracking-tight text-slate-900">lingoflow.</h1>
+            </div>
+            <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                <span id="statusLabel">siap</span>
+            </div>
+        </div>
+
+        <div class="main-card rounded-[2.5rem] overflow-hidden">
+            <!-- premium language selector -->
+            <div class="flex items-center border-b border-slate-50 p-3 bg-slate-50/30">
+                <button id="btnSource" class="flex-1 flex items-center justify-between px-4 py-2 text-xs font-bold text-slate-600 hover:bg-white rounded-2xl transition-all btn-press">
+                    <span id="sourceDisplay">indonesia</span>
+                    <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                
+                <button id="swapBtn" class="mx-2 p-2 text-slate-300 hover:text-blue-500 transition-colors btn-press">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m7 16-4-4 4-4"/><path d="M3 12h18"/><path d="m17 8 4 4-4 4"/></svg>
+                </button>
+
+                <button id="btnTarget" class="flex-1 flex items-center justify-between px-4 py-2 text-xs font-bold text-slate-600 hover:bg-white rounded-2xl transition-all btn-press">
+                    <span id="targetDisplay">inggris</span>
+                    <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+            </div>
+
+            <!-- text areas -->
+            <div class="flex flex-col">
+                <div class="p-6 transition-all border-b border-slate-50">
+                    <textarea id="inputText" rows="1" placeholder="ketik aja di sini..." class="w-full text-xl font-semibold text-slate-800 placeholder-slate-200 bg-transparent border-0 focus:ring-0 outline-none p-0"></textarea>
+                </div>
+
+                <div id="outputContainer" class="p-6 bg-blue-50/10 group relative transition-all min-h-[100px]">
+                    <div id="outputText" class="text-xl font-semibold text-slate-700 leading-relaxed"></div>
+                    
+                    <div class="absolute right-6 top-6 flex items-center gap-3">
+                        <span id="copyMsg" class="hidden text-[10px] font-bold text-blue-500 uppercase tracking-widest">tersalin</span>
+                        <button id="copyBtn" class="opacity-0 group-hover:opacity-100 p-2.5 bg-white shadow-sm border border-slate-100 rounded-xl text-slate-400 hover:text-blue-600 transition-all active:scale-90">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center px-4">
+            <span class="text-[9px] font-bold text-slate-300 uppercase tracking-widest" id="charCounter">0 / 1000</span>
+            <span class="text-[9px] font-bold text-blue-400/40 uppercase tracking-widest">30 languages • realtime engine</span>
+        </div>
+    </div>
+
+    <!-- language modal -->
+    <div id="langModal" class="custom-modal">
+        <div class="bg-white w-full max-w-sm rounded-[2rem] shadow-2xl p-6 animate-pop border border-slate-100">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest">pilih bahasa</h3>
+                <button id="closeModal" class="p-1 hover:bg-slate-100 rounded-lg text-slate-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div id="langList" class="lang-grid grid grid-cols-2 gap-2">
+                <!-- populated by js -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const languages = [
+            "inggris", "mandarin", "spanyol", "prancis", "arab", "bengali", "portugis", "rusia", 
+            "jepang", "punjabi", "jerman", "jawa", "melayu", "indonesia", "telugu", "vietnam", 
+            "korea", "italia", "turki", "thailand", "persia", "polandia", "belanda", "filipina",
+            "hindi", "marathi", "tamil", "gujarati", "urdu", "kannada"
+        ].sort();
+
+        const inputText = document.getElementById('inputText');
+        const outputText = document.getElementById('outputText');
+        const statusLabel = document.getElementById('statusLabel');
+        const charCounter = document.getElementById('charCounter');
+        const copyBtn = document.getElementById('copyBtn');
+        const copyMsg = document.getElementById('copyMsg');
+        const langModal = document.getElementById('langModal');
+        const langList = document.getElementById('langList');
+        const sourceDisplay = document.getElementById('sourceDisplay');
+        const targetDisplay = document.getElementById('targetDisplay');
+
+        let currentMode = 'source'; // 'source' or 'target'
+        let sourceLang = "indonesia";
+        let targetLang = "inggris";
+        let debounceTimer;
+        let abortController = null;
+
+        // populate language grid
+        languages.forEach(lang => {
+            const btn = document.createElement('button');
+            btn.className = "px-4 py-3 text-xs font-semibold text-slate-600 bg-slate-50 hover:bg-blue-600 hover:text-white rounded-xl transition-all text-left truncate";
+            btn.innerText = lang;
+            btn.onclick = () => selectLang(lang);
+            langList.appendChild(btn);
+        });
+
+        // modal controls
+        document.getElementById('btnSource').onclick = () => openModal('source');
+        document.getElementById('btnTarget').onclick = () => openModal('target');
+        document.getElementById('closeModal').onclick = () => langModal.style.display = 'none';
+        
+        function openModal(mode) {
+            currentMode = mode;
+            langModal.style.display = 'flex';
+        }
+
+        function selectLang(lang) {
+            if (currentMode === 'source') {
+                sourceLang = lang;
+                sourceDisplay.innerText = lang;
+            } else {
+                targetLang = lang;
+                targetDisplay.innerText = lang;
+            }
+            langModal.style.display = 'none';
+            translate();
+        }
+
+        const autoResize = (el) => {
+            el.style.height = 'auto';
+            el.style.height = el.scrollHeight + 'px';
+        };
+
+        const updateStatus = (state) => {
+            statusLabel.innerText = state;
+            statusLabel.style.color = state === 'mikir' ? '#3b82f6' : '#94a3b8';
+        };
+
+        inputText.addEventListener('input', (e) => {
+            autoResize(e.target);
+            charCounter.innerText = `${e.target.value.length} / 1000`;
+            clearTimeout(debounceTimer);
+            if (!inputText.value.trim()) {
+                outputText.innerHTML = "";
+                updateStatus('siap');
+                return;
+            }
+            debounceTimer = setTimeout(translate, 350);
+        });
+
+        async function translate() {
+            const text = inputText.value.trim();
+            if (!text) return;
+
+            if (abortController) abortController.abort();
+            abortController = new AbortController();
+
+            updateStatus('mikir');
+
+            try {
+                const response = await fetch('/api/translate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text, sourceLang, targetLang }),
+                    signal: abortController.signal
+                });
+
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.error || 'Proxy error');
+                }
+
+                const data = await response.json();
+                if (data.error) throw new Error(data.error);
+
+                outputText.innerHTML = marked.parse(data.translation.trim());
+                updateStatus('beres');
+            } catch (err) {
+                if (err.name !== 'AbortError') {
+                    console.error(err);
+                    updateStatus('error');
+                    outputText.innerHTML = '<span class="text-red-500">Gagal nerjemahin... Coba lagi ya bro.</span>';
+                }
+            }
+        }
+
+        document.getElementById('swapBtn').onclick = () => {
+            const temp = sourceLang;
+            sourceLang = targetLang;
+            targetLang = temp;
+            sourceDisplay.innerText = sourceLang;
+            targetDisplay.innerText = targetLang;
+            translate();
+        };
+
+        copyBtn.onclick = () => {
+            const textToCopy = outputText.innerText;
+            if (!textToCopy) return;
+            const el = document.createElement('textarea');
+            el.value = textToCopy;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            copyMsg.classList.remove('hidden');
+            setTimeout(() => copyMsg.classList.add('hidden'), 1500);
+        };
+    </script>
+</body>
+</html>
