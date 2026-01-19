@@ -3,8 +3,8 @@
 
 <div align="center">
 
-![GitHub stars](https://img.shields.io/github/stars/username/lingoflow?style=for-the-badge&color=blue)
-![GitHub forks](https://img.shields.io/github/forks/username/lingoflow?style=for-the-badge&color=6366f1)
+![GitHub stars](https://img.shields.io/github/stars/AryaXzell/lingoflow?style=for-the-badge&color=blue)
+![GitHub forks](https://img.shields.io/github/forks/AryaXzell/lingoflow?style=for-the-badge&color=6366f1)
 ![License](https://img.shields.io/badge/License-MIT-000000?style=for-the-badge)
 ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)
 
