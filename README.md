@@ -1,42 +1,48 @@
 # 🌊 lingoflow.
-> **minimalist, premium, & realtime translation engine.**
+> **experience the next level of translation with a premium, minimalist, and snappy interface.**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Tailwind](https://img.shields.io/badge/Style-Tailwind_CSS-06B6D4?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![JS](https://img.shields.io/badge/Engine-Vanilla_JS-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![Status](https://img.shields.io/badge/Status-Live-success?style=flat-square)](#)
+<div align="center">
 
-lingoflow adalah aplikasi penerjemah modern yang fokus pada kecepatan dan kenyamanan visual. didesain dengan estetika "glassmorphism" tipis-tipis dan tipografi yang tajam buat pengalaman translasi yang lebih premium.
+![GitHub stars](https://img.shields.io/github/stars/username/lingoflow?style=for-the-badge&color=blue)
+![GitHub forks](https://img.shields.io/github/forks/username/lingoflow?style=for-the-badge&color=6366f1)
+![License](https://img.shields.io/badge/License-MIT-000000?style=for-the-badge)
+![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)
 
----
-
-## ✨ fitur utama
-
-* **⚡ realtime translation**: nerjemahin sambil lu ngetik, nggak perlu nunggu tombol klik.
-* **📝 markdown support**: hasil terjemahan bisa nampilin format bold, italic, dan list berkat integrasi `marked.js`.
-* **🌍 30+ bahasa populer**: support bahasa dunia mulai dari inggris sampai bahasa daerah seperti jawa.
-* **📱 ultra responsive**: layout yang adaptif, tetap cantik di layar hp maupun desktop.
-* **📋 one-click copy**: fitur salin hasil terjemahan instan dengan feedback visual.
+</div>
 
 ---
 
-## 🛠️ tech stack
+### 📖 overview
+**lingoflow** bukan cuma translator biasa. ini adalah *premium translation tool* yang dirancang buat lu yang bosen sama tampilan translator kaku. dibangun dengan **Vanilla JS** dan **Tailwind CSS**, aplikasi ini nawarin kecepatan *realtime* dengan *UI/UX* yang sangat *clean*.
 
-proyek ini dibangun dengan pendekatan *lightweight* tanpa framework berat:
 
-| component | tools |
-| :--- | :--- |
-| **styling** | `Tailwind CSS (via CDN)` |
-| **parser** | `Marked.js` |
-| **font** | `Plus Jakarta Sans` |
-| **icons** | `Lucide Icons / Feather` |
 
 ---
 
-## 📂 struktur proyek
+### 🚀 features & highlights
 
-```text
-lingoflow/
-├── index.html      # UI & Logic utama (the magic happens here)
-├── README.md       # dokumentasi yang lu baca ini
-└── api/            # (optional) tempat backend proxy lu
+| fitur | penjelasan | status |
+| :--- | :--- | :---: |
+| **Realtime Engine** | nerjemahin otomatis pas lu lagi ngetik (debounced) | ✅ |
+| **Markdown Render** | hasil translasi support formatting (bold, italic, list) | ✅ |
+| **Auto-Resize** | area input yang fleksibel ngikutin panjang teks lu | ✅ |
+| **Smart Swap** | tukar bahasa sumber & tujuan dalam sekali klik | ✅ |
+| **Modern Modal** | pemilihan 30+ bahasa dengan interface yang *smooth* | ✅ |
+| **Abort Controller** | sistem pinter yang nge-cancel request lama biar nggak lag | ✅ |
+
+---
+
+### 🛠️ technical workflow
+lingoflow dirancang biar nggak boros *resource*:
+1. **Input Tracking**: memantau setiap ketikan user.
+2. **Debouncing (350ms)**: nunggu lu jeda ngetik bentar baru kirim request (biar hemat API).
+3. **Abort Signal**: kalau lu ngetik lagi pas proses *loading*, request sebelumnya langsung dibatalin.
+4. **Markdown Parsing**: nerima data dari backend dan ngerapiin tampilannya pake `marked.js`.
+
+---
+
+### 💻 setup lokal
+
+1. **clone repository**
+   ```bash
+   git clone [https://github.com/AryaXzell/lingoflow.git](https://github.com/AryaXzell/lingoflow.git)
