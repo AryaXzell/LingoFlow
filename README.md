@@ -58,7 +58,7 @@ lingoflow dirancang biar nggak boros *resource* dan tetep *snappy*:
 
 1.  **clone repository**
     ```bash
-    git clone [https://github.com/AryaXzell/lingoflow.git](https://github.com/AryaXzell/lingoflow.git)
+    git clone https://github.com/AryaXzell/lingoflow.git
     ```
 2.  **masuk ke direktori**
     ```bash
