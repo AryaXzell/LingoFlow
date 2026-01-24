@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://owivtazpjnkbncfwmitk.supabase.co/storage/v1/object/public/media/03c8c619-f1f6-4bd3-8d77-6e9e3e24dad2.png" alt="lingoflow-banner" width="100%">
+  <img src="logo/banner.png" alt="lingoflow-banner" width="100%">
 </p>
 
 <h1 align="center">🌊 lingoflow.</h1>
