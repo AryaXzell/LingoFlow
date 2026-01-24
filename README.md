@@ -81,7 +81,7 @@ kontribusi lu sangat dihargai! kalau punya ide fitur baru atau nemu bug:
 ---
 
 <p align="center">
-  <img src="https://avatars.githubusercontent.com/u/198467490?v=4&s=80" style="border-radius: 50%" alt="AryaXzell">
+  <img src="https://owivtazpjnkbncfwmitk.supabase.co/storage/v1/object/public/media/d654352f-e0a3-463b-a707-c688ce438cd3.jpg" style="border-radius: 50%" alt="AryaXzell">
   <br>
   developed by <b><a href="https://github.com/AryaXzell">AryaXzell</a></b>
 </p>
