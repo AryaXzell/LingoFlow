@@ -23,7 +23,7 @@
 **lingoflow** bukan cuma translator biasa. ini adalah *premium translation tool* yang dirancang buat lu yang bosen sama tampilan translator kaku. dibangun dengan fokus pada kecepatan *realtime* dan *UI/UX* yang sangat *clean*.
 
 ### 🛠️ built with
-<p align="left">
+<p align="center">
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=js,tailwind,html,css,github,vercel" />
   </a>
@@ -56,23 +56,32 @@ lingoflow dirancang biar nggak boros *resource* dan tetep *snappy*:
 
 ### 💻 setup lokal
 
-1. **clone repository**
-   ```bash
-   git clone [https://github.com/AryaXzell/lingoflow.git](https://github.com/AryaXzell/lingoflow.git)
+1.  **clone repository**
+    ```bash
+    git clone [https://github.com/AryaXzell/lingoflow.git](https://github.com/AryaXzell/lingoflow.git)
+    ```
+2.  **masuk ke direktori**
+    ```bash
+    cd lingoflow
+    ```
+3.  **jalankan project**
+    cukup buka `index.html` di browser kesayangan lu atau pake *live server*.
 
- * masuk ke direktori
-   cd lingoflow
+---
 
- * jalankan project
-   cukup buka index.html di browser kesayangan lu atau pake live server.
-🤝 contributing
+### 🤝 contributing
 kontribusi lu sangat dihargai! kalau punya ide fitur baru atau nemu bug:
- * fork project ini
- * bikin branch baru (git checkout -b feature/AmazingFeature)
- * commit perubahan lu (git commit -m 'add some amazing feature')
- * push ke branch (git push origin feature/AmazingFeature)
- * open a pull request
+
+1.  **fork** project ini.
+2.  bikin **branch** baru (`git checkout -b feature/AmazingFeature`).
+3.  **commit** perubahan lu (`git commit -m 'add some amazing feature'`).
+4.  **push** ke branch (`git push origin feature/AmazingFeature`).
+5.  open a **pull request**.
+
+---
+
 <p align="center">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/made%2520with-%25E2%259D%25A4-red%3Fstyle%3Dfor-the-badge" alt="made with love">
+  <img src="https://avatars.githubusercontent.com/u/198467490?v=4&s=80" style="border-radius: 50%" alt="AryaXzell">
+  <br>
+  developed by <b><a href="https://github.com/AryaXzell">AryaXzell</a></b>
 </p>
-<p align="center">developed by <b><a href="https://www.google.com/search?q=https://github.com/AryaXzell">AryaXzell</a></b></p>
